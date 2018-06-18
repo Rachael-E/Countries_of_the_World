@@ -20,10 +20,13 @@ class App extends PureComponent {
         <EsriLoaderReact
           options={options}
           modulesToLoad={['esri/Map', 'esri/views/MapView']}
-            onReady={({loadedModules: [Map, MapView], containerNode}) => {
-              this.setState({map: new MapView({
+          onReady={({loadedModules: [Map, MapView], containerNode}) => {
+            this.setState({
+              view: new MapView({
                 container: containerNode,
-                map: new Map({basemap: 'streets'})
+                center: [-3.2, 55.5],
+                zoom: 6,
+                map: new Map({basemap: 'satellite'})
               })
             })
           }}

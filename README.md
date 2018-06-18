@@ -1,4 +1,11 @@
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+This repo consists of my final project created during my final week of CodeClan. It uses the ArcGIS JS API to render a map using React, and that is all!
+
+This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app), and uses the esri-loader-react and esri-loader modules using documentation [from this GitHub repo](https://github.com/davetimmins/esri-loader-react).
+
+
+
+
+
 
 Below you will find some information on how to perform common tasks.<br>
 You can find the most recent version of this guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
