@@ -33,9 +33,9 @@ class MapContainer extends PureComponent {
     .catch(error => console.log("Error:", error))
   }
 
-  onReadyCallback({loadedModules: [Map, MapView, Graphic, BasemapToggle], containerNode}){
+  onReadyCallback({loadedModules: [Map, MapView, Graphic, BasemapToggle, Color, PictureMarkerSymbol], containerNode}){
 
-      console.log("this.state.allCountryCoords", this.state.allCountryCoords)
+      // console.log("this.state.allCountryCoords", this.state.allCountryCoords)
 
       const theMap = new Map({
         basemap: 'oceans'
@@ -44,10 +44,9 @@ class MapContainer extends PureComponent {
       const mapView = new MapView({
         container: containerNode,
         center: [-3.2, 55.5],
-        zoom: 6,
+        zoom: 4,
         map: theMap
       });
-
 
       const uniqueCountryMarkers = this.state.countries.map((country) => {
 
@@ -58,25 +57,28 @@ class MapContainer extends PureComponent {
             latitude: country.latlng[1]
           },
           symbol: {
-            type: "simple-marker",
-            color: [226, 119, 40],
-            outline: {
-              color: [255, 255, 255],
-              width: 2
-            }
+            type: "picture-marker",
+            url: "http://static.arcgis.com/images/Symbols/Basic/WhiteFlag.png",
+            width: 15,
+            height: 15
+            // color: new Color ("#2454a0"),
+            // outline: {
+            //   color: [255, 255, 255],
+            //   width: 2
+            // }
           },
           attributes: {
-            LocalityName: country.name,
-            LocalityDescription: country.region,
-            DataHeld: "Links to data:"
+            Country: country.name,
+            Region: country.region,
+            Population: country.population
           },
           popupTemplate: {
-            title: "{LocalityName}",
+            title: "{Country}",
             content: [
               {
                 type: "fields",
                 fieldInfos: [
-                  {fieldName: "LocalityName"}, {fieldName: "LocalityDescription"}, {fieldName: "DataHeld"}
+                  {fieldName: "Country"}, {fieldName: "Region"}, {fieldName: "Population"}
                 ]
               }
             ]
@@ -110,7 +112,7 @@ class MapContainer extends PureComponent {
       var componentToRender = (
         <EsriLoaderReact
           options={options}
-          modulesToLoad={['esri/Map', 'esri/views/MapView', 'esri/Graphic', 'esri/widgets/BasemapToggle']}
+          modulesToLoad={['esri/Map', 'esri/views/MapView', 'esri/Graphic', 'esri/widgets/BasemapToggle', 'esri/Color']}
           onReady={this.onReadyCallback}
         />
       )
@@ -118,6 +120,7 @@ class MapContainer extends PureComponent {
 
     return (
       <div className ="App">
+        <h3>Countries of the World</h3>
         {componentToRender}
       </div>
     );
