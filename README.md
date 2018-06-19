@@ -1,4 +1,6 @@
-This repo consists of my final project created during my final week of CodeClan. It uses the ArcGIS JS API to render a map using React, and that is all!
+This repo consists of my final project created during my final week of CodeClan. It uses the ArcGIS JS API to render a map using React, and populates the map with data from the REST Countries API.
+
+The map pin icon is sourced from [this tutorial] (https://developers.arcgis.com/javascript/3/sandbox/sandbox.html?sample=portal_symbols) from the ArcGIS API documentation.
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app), and uses the esri-loader-react and esri-loader modules using documentation [from this GitHub repo](https://github.com/davetimmins/esri-loader-react).
 

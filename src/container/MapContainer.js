@@ -38,7 +38,7 @@ class MapContainer extends PureComponent {
       // console.log("this.state.allCountryCoords", this.state.allCountryCoords)
 
       const theMap = new Map({
-        basemap: 'oceans'
+        basemap: 'satellite'
       });
 
       const mapView = new MapView({
@@ -58,9 +58,9 @@ class MapContainer extends PureComponent {
           },
           symbol: {
             type: "picture-marker",
-            url: "http://static.arcgis.com/images/Symbols/Basic/WhiteFlag.png",
-            width: 15,
-            height: 15
+            url: "http://static.arcgis.com/images/Symbols/Basic/LightBlueStickpin.png",
+            width: 20,
+            height: 20
             // color: new Color ("#2454a0"),
             // outline: {
             //   color: [255, 255, 255],
@@ -91,7 +91,7 @@ class MapContainer extends PureComponent {
 
       const toggle = new BasemapToggle({
         view: mapView,
-        nextBasemap: "satellite"
+        nextBasemap: "oceans"
       });
       mapView.ui.add(toggle, "top-right");
 
@@ -121,6 +121,7 @@ class MapContainer extends PureComponent {
     return (
       <div className ="App">
         <h3>Countries of the World</h3>
+        <p> Click on a pin to find out more about a country </p>
         {componentToRender}
       </div>
     );
