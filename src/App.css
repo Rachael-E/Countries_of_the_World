@@ -29,6 +29,36 @@
   margin: 0 auto;
 }
 
+.esri-table {
+  color: #3c8bb3;
+}
+
+.esri-widget {
+  font-family: 'Amatic SC', cursive;
+  font-size: auto;
+}
+
+h2.esri-popup__header-title {
+  font-size: 22px;
+}
+
+.esri-attribution {
+  font-size: 20px;
+}
+
+.esri-table tr td,
+.esri-table tr th {
+  font-size: 16px;
+}
+
+/* .esri-popup__main-container {
+
+    background-color: #FFF;
+
+} */
+
+
+
 h3 {
   margin-top: 10px;
   margin-bottom: 10px;
