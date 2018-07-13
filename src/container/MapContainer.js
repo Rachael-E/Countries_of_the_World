@@ -48,77 +48,46 @@ class MapContainer extends PureComponent {
       map: theMap
     });
 
+
     const uniqueCountryMarkers = this.state.countries.map((country) => {
 
+      const graphic = new Graphic({
+        geometry: {
+          type: 'point',
+          longitude: country.latlng[0],
+          latitude: country.latlng[1]
+        },
+        symbol: {
+          type: "picture-marker",
+          url: "http://static.arcgis.com/images/Symbols/Basic/LightBlueShinyPin.png",
+          width: 20,
+          height: 20
+        },
+        attributes: {
+          Country: country.name,
+          Region: country.region,
+          Population: country.population
+        },
+        popupTemplate: {
+          title: "{Country}",
+          content: [
+            {
+              type: "fields",
+              fieldInfos: [
+                {fieldName: "Country"}, {fieldName: "Region"}, {fieldName: "Population"}
+              ]
+            }
+          ]
+        }
+      })
+
       if (country.region === "Europe"){
-        return new Graphic({
-          geometry: {
-            type: 'point',
-            longitude: country.latlng[0],
-            latitude: country.latlng[1]
-          },
-
-          symbol: {
-            type: "picture-marker",
-            url: "http://static.arcgis.com/images/Symbols/Basic/PurpleShinyPin.png",
-            width: 20,
-            height: 20
-          },
-
-          attributes: {
-            Country: country.name,
-            Region: country.region,
-            Population: country.population
-          },
-
-          popupTemplate: {
-            title: "{Country}",
-            content: [
-              {
-                type: "fields",
-                fieldInfos: [
-                  {fieldName: "Country"}, {fieldName: "Region"}, {fieldName: "Population"}
-                ]
-              }
-            ]
-          }
-        })
+        graphic.symbol.url = "http://static.arcgis.com/images/Symbols/Basic/PurpleShinyPin.png"
       }
 
-      else {
+      return graphic
 
-        return new Graphic({
-          geometry: {
-            type: 'point',
-            longitude: country.latlng[0],
-            latitude: country.latlng[1]
-          },
-          symbol: {
-            type: "picture-marker",
-            url: "http://static.arcgis.com/images/Symbols/Basic/LightBlueShinyPin.png",
-            width: 20,
-            height: 20
-          },
-          attributes: {
-            Country: country.name,
-            Region: country.region,
-            Population: country.population
-          },
-          popupTemplate: {
-            title: "{Country}",
-            content: [
-              {
-                type: "fields",
-                fieldInfos: [
-                  {fieldName: "Country"}, {fieldName: "Region"}, {fieldName: "Population"}
-                ]
-              }
-            ]
-          }
-        })
-      }
     })
-
 
     mapView.graphics.addMany(uniqueCountryMarkers);
 
