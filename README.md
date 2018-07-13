@@ -1,4 +1,8 @@
-This repo consists of my final project created during my final week of CodeClan. It uses the ArcGIS JS API to render a map using React, and populates the map with data from the REST Countries API.
+This repo consists of my final project created during my final week of CodeClan. It uses the ArcGIS JS API to render a map using React, and populates the map with data from the REST Countries API. The web application shows a map of the world, with pins showing each country from the REST Countries API. Countries within the Europe region have been marked a different colour for visual ease. 
+
+![Screenshot of home map](WorldCountries_Home.png)
+![Screenshot of map detail](WorldCountries_Detail.png)
+
 
 The map pin icon is sourced from [this tutorial] (https://developers.arcgis.com/javascript/3/sandbox/sandbox.html?sample=portal_symbols) from the ArcGIS API documentation.
 
