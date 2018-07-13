@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import EsriLoaderReact from 'esri-loader-react';
 import './App.css'
 import MapContainer from './container/MapContainer'
 

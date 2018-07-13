@@ -35,20 +35,57 @@ class MapContainer extends PureComponent {
 
   onReadyCallback({loadedModules: [Map, MapView, Graphic, BasemapToggle, Color, PictureMarkerSymbol], containerNode}){
 
-      // console.log("this.state.allCountryCoords", this.state.allCountryCoords)
+    // console.log("this.state.allCountryCoords", this.state.allCountryCoords)
 
-      const theMap = new Map({
-        basemap: 'satellite'
-      });
+    const theMap = new Map({
+      basemap: 'satellite'
+    });
 
-      const mapView = new MapView({
-        container: containerNode,
-        center: [-3.2, 55.5],
-        zoom: 4,
-        map: theMap
-      });
+    const mapView = new MapView({
+      container: containerNode,
+      center: [-3.2, 55.5],
+      zoom: 4,
+      map: theMap
+    });
 
-      const uniqueCountryMarkers = this.state.countries.map((country) => {
+    const uniqueCountryMarkers = this.state.countries.map((country) => {
+
+      if (country.region === "Europe"){
+        return new Graphic({
+          geometry: {
+            type: 'point',
+            longitude: country.latlng[0],
+            latitude: country.latlng[1]
+          },
+
+          symbol: {
+            type: "picture-marker",
+            url: "http://static.arcgis.com/images/Symbols/Basic/PurpleShinyPin.png",
+            width: 20,
+            height: 20
+          },
+
+          attributes: {
+            Country: country.name,
+            Region: country.region,
+            Population: country.population
+          },
+
+          popupTemplate: {
+            title: "{Country}",
+            content: [
+              {
+                type: "fields",
+                fieldInfos: [
+                  {fieldName: "Country"}, {fieldName: "Region"}, {fieldName: "Population"}
+                ]
+              }
+            ]
+          }
+        })
+      }
+
+      else {
 
         return new Graphic({
           geometry: {
@@ -58,14 +95,9 @@ class MapContainer extends PureComponent {
           },
           symbol: {
             type: "picture-marker",
-            url: "http://static.arcgis.com/images/Symbols/Basic/LightBlueStickpin.png",
+            url: "http://static.arcgis.com/images/Symbols/Basic/LightBlueShinyPin.png",
             width: 20,
             height: 20
-            // color: new Color ("#2454a0"),
-            // outline: {
-            //   color: [255, 255, 255],
-            //   width: 2
-            // }
           },
           attributes: {
             Country: country.name,
@@ -84,18 +116,19 @@ class MapContainer extends PureComponent {
             ]
           }
         })
-      })
+      }
+    })
 
 
-      mapView.graphics.addMany(uniqueCountryMarkers);
+    mapView.graphics.addMany(uniqueCountryMarkers);
 
-      const toggle = new BasemapToggle({
-        view: mapView,
-        nextBasemap: "oceans"
-      });
-      mapView.ui.add(toggle, "top-right");
+    const toggle = new BasemapToggle({
+      view: mapView,
+      nextBasemap: "oceans"
+    });
+    mapView.ui.add(toggle, "top-right");
 
-    }
+  }
 
 
   render() {
@@ -109,7 +142,7 @@ class MapContainer extends PureComponent {
         <p>Loading data ....</p>
       )
     } else {
-      var componentToRender = (
+      componentToRender = (
         <EsriLoaderReact
           options={options}
           modulesToLoad={['esri/Map', 'esri/views/MapView', 'esri/Graphic', 'esri/widgets/BasemapToggle', 'esri/Color']}
